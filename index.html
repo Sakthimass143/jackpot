@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>JACKPOT-IN</title>
+
+    <!-- Your existing assets (optional if you use them elsewhere) -->
+    <script src="js/jquery.tools.min.js"></script>
+    <link href="css/slidingtabs.css" rel="stylesheet" type="text/css" />
+    <link href="css/easySlider.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="js/jquery.scrollTo.js"></script>
+    <script type="text/javascript" src="js/slidingtabs.js"></script>
+
+    <!-- jQuery (needed for your other scripts; the timer itself is vanilla) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style type="text/css">
+        ul#saturday {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            width: auto;
+            position: relative;
+            display: block;
+            height: 36px;
+            text-transform: uppercase;
+            font-size: 12px;
+            font-weight: bold;
+            background: transparent url("img/bgOFF.gif") repeat-x top left;
+            font-family: Helvetica, Arial, Verdana, sans-serif;
+            border-bottom: 4px solid #336666;
+            border-top: 1px solid #C0E2D4;
+        }
+
+        ul#saturday li {
+            display: block;
+            float: left;
+            margin: 0;
+            padding: 0;
+        }
+
+        ul#saturday li a {
+            display: block;
+            float: left;
+            color: #874B46;
+            text-decoration: none;
+            padding: 12px 20px 0 20px;
+            height: 24px;
+            background: transparent url("img/bgDIVIDER.gif") no-repeat top right;
+        }
+
+        ul#saturday li a:hover {
+            background: transparent url("img/bgHOVER.gif") no-repeat top right;
+        }
+
+        ul#saturday li a.current,
+        ul#saturday li a.current:hover {
+            color: #fff;
+            background: transparent url("img/bgON.gif") no-repeat top right;
+        }
+
+        body {
+            font-family: "Lucida Grande", "bitstream vera sans", "trebuchet ms", sans-serif, verdana;
+            background-color: #fe4800;
+            background-image: url(img/innerwrapbg3.jpg);
+            margin: 0;
+            background-repeat: no-repeat;
+        }
+
+        .textbox {
+            background: none;
+            color: #874B46;
+            border: none;
+            cursor: default;
+            font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .label1 {
+            background: none;
+            color: #000;
+            border: none;
+            cursor: default;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 15px;
+            height: 24px;
+        }
+
+        .table1 {
+            background: none;
+            border: none;
+            color: none;
+        }
+
+        /* Optional page padding so header isn't cramped */
+        .page-pad {
+            padding: 16px;
+        }
+    </style>
+</head>
+
+<body style="text-align:center">
+    <!-- HEADER -->
+    <form name="timeform">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <th scope="col"><img src="img/top1.jpg" width="100%" height="120" alt="Header" /></th>
+            </tr>
+            <tr align="center">
+                <td>
+                    <ul id="saturday">
+                        <li><a href="index.html" title="Home">Home</a></li>
+                        <li><a href="result.html" title="Today Result">Today Result</a></li>
+                        <li><a href="resultdownload.html" title="Download Result">Download Result</a></li>
+                        <li><a href="#" title="">Schemes</a></li>
+                        <li><a href="#" title="">Contact us</a></li>
+                        <li>
+                            <b class="textbox" style="padding:10px 18px 0;height:24px;float:left;color:#874B46;">
+                                <span>Draw Time : </span>
+                                <input type="text" id="displaytime1" name="displaytime1" size="8" readonly
+                                    class="textbox" value="--:--:--" />
+                                <span>&nbsp;&nbsp;Time Left : </span>
+                                <input type="text" id="displaytime2" name="displaytime2" size="8" readonly
+                                    class="textbox" value="00:00:00" />
+                            </b>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <div class="page-pad">
+        <table border="0" width="100%">
+            <tr>
+                <td align="center" style="font-family:Tahoma;font-size:25px;color:#FFFF00">
+                    WELCOME TO NEW SERVER JACKPOT IN !!!!
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Optional: your tabs init if you use #accordion somewhere -->
+    <script>
+        $(function () {
+            if ($("#accordion").length > 0) {
+                $("#accordion").tabs("#accordion div.pane", { tabs: 'h2', effect: 'slide', initialIndex: null });
+            }
+            // Custom slide effect definition (kept from your original)
+            if ($.tools && $.tools.tabs) {
+                $.tools.tabs.addEffect("slide", function (i, done) {
+                    this.getPanes().slideUp().css({ backgroundColor: "#b8128f" });
+                    this.getPanes().eq(i).slideDown(function () {
+                        $(this).css({ backgroundColor: 'transparent' });
+                        done.call();
+                    });
+                });
+            }
+        });
+    </script>
+
+    <!-- ===== NEXT DRAW PICK + LIVE COUNTDOWN (IST SAFE) ===== -->
+    <script>
+        (function () {
+            'use strict';
+
+            // Draw slots in 24h format
+            const SLOTS = ["11:00", "12:00", "13:00", "14:00", "16:00", "18:00", "19:00", "20:00"];
+
+            function nowIST() {
+                return new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
+            }
+            function ymdIST(d) {
+                const y = d.getFullYear();
+                const m = String(d.getMonth() + 1).padStart(2, '0');
+                const day = String(d.getDate()).padStart(2, '0');
+                return `${y}-${m}-${day}`;
+            }
+            function istDateAt(ymd, hhmm) {
+                const [y, m, d] = ymd.split('-').map(Number);
+                const [H, M] = hhmm.split(':').map(Number);
+                const t = nowIST();
+                t.setFullYear(y, m - 1, d);
+                t.setHours(H, M, 0, 0);
+                return t;
+            }
+            function formatHMS(totalSeconds) {
+                const s = Math.max(0, Math.floor(totalSeconds));
+                const hh = String(Math.floor(s / 3600)).padStart(2, '0');
+                const mm = String(Math.floor((s % 3600) / 60)).padStart(2, '0');
+                const ss = String(s % 60).padStart(2, '0');
+                return `${hh}:${mm}:${ss}`;
+            }
+            function getNextDrawDate() {
+                const now = nowIST();
+                const today = ymdIST(now);
+                for (const slot of SLOTS) {
+                    const when = istDateAt(today, slot);
+                    if (when.getTime() > now.getTime()) {
+                        return when;
+                    }
+                }
+                const tomorrow = nowIST();
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                const ymdTomorrow = ymdIST(tomorrow);
+                return istDateAt(ymdTomorrow, SLOTS[0]);
+            }
+
+            const displayNext = document.getElementById('displaytime1');
+            const displayLeft = document.getElementById('displaytime2');
+
+            function tick() {
+                const nextDraw = getNextDrawDate();
+
+                // 12-hour format with AM/PM
+                let hours12 = nextDraw.getHours() % 12 || 12;
+                let ampm = nextDraw.getHours() >= 12 ? 'PM' : 'AM';
+                let hh12 = String(hours12).padStart(2, '0');
+                let mm = String(nextDraw.getMinutes()).padStart(2, '0');
+                let nextTimeStr = `${hh12}:${mm}:00 ${ampm}`;
+
+                const diffSec = (nextDraw.getTime() - nowIST().getTime()) / 1000;
+
+                if (displayNext) displayNext.value = nextTimeStr;
+                if (displayLeft) displayLeft.value = formatHMS(diffSec);
+            }
+
+            tick();
+            setInterval(tick, 1000);
+        })();
+    </script>
+
+</body>
+
+</html>

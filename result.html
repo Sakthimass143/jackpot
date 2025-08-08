@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8" />
+  <title>JACKPOT-IN</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- jQuery + your existing plugins (paths as in your site) -->
+  <script src="js/jquery.tools.min.js"></script>
+  <script src="js/jquery.scrollTo.js"></script>
+  <script src="js/slidingtabs.js"></script>
+
+  <link href="css/slidingtabs.css" rel="stylesheet" />
+  <link href="css/easySlider.css" rel="stylesheet" />
+
+  <style>
+    ul#saturday {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      width: auto;
+      position: relative;
+      display: block;
+      height: 36px;
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: bold;
+      background: transparent url("img/bgOFF.gif") repeat-x top left;
+      font-family: Helvetica, Arial, Verdana, sans-serif;
+      border-bottom: 4px solid #336666;
+      border-top: 1px solid #C0E2D4;
+    }
+
+    ul#saturday li {
+      display: block;
+      float: left;
+      margin: 0;
+      padding: 0;
+    }
+
+    ul#saturday li a {
+      display: block;
+      float: left;
+      color: #874B46;
+      text-decoration: none;
+      padding: 12px 20px 0 20px;
+      height: 24px;
+      background: transparent url("img/bgDIVIDER.gif") no-repeat top right;
+    }
+
+    ul#saturday li a:hover {
+      background: transparent url("img/bgHOVER.gif") no-repeat top right;
+    }
+
+    ul#saturday li a.current,
+    ul#saturday li a.current:hover {
+      color: #fff;
+      background: transparent url("img/bgON.gif") no-repeat top right;
+    }
+
+    body {
+      font-family: "Lucida Grande", "bitstream vera sans", "trebuchet ms", sans-serif, verdana;
+      background-color: #fe4800;
+      background-image: url(img/innerwrapbg3.jpg);
+      margin: 0;
+      background-repeat: no-repeat;
+    }
+
+    a:active {
+      outline: none;
+    }
+
+    :focus {
+      outline-style: none;
+      -moz-outline-style: none;
+    }
+
+    .textbox {
+      background: none;
+      color: #874B46;
+      border: none;
+      cursor: default;
+      font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+      text-align: center;
+      font-size: 20px;
+    }
+
+    .label1 {
+      background: none;
+      color: #000;
+      border: none;
+      cursor: default;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 15px;
+      height: 24px;
+    }
+
+    .table1 {
+      background: none;
+      border: none;
+      color: none;
+    }
+  </style>
+</head>
+
+<body style="text-align:center">
+  <form name="timeform">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <th scope="col"><img src="img/top1.jpg" width="100%" height="120" alt="Header" /></th>
+      </tr>
+      <tr align="center">
+        <td>
+          <ul id="saturday">
+            <li><a href="index.html" title="Home">Home</a></li>
+            <li><a href="result.html" title="Today Result">Today Result</a></li>
+            <li><a href="resultdownload.html" title="Download Result">Download Result</a></li>
+            <li><a href="#" title="">Schemes</a></li>
+            <li><a href="#" title="">Contact us</a></li>
+            <li>
+              <b class="textbox" style="padding:10px 18px 0;height:24px;float:left;color:#874B46;">
+                <span>Draw Time : </span><input type="text" id="displaytime1" name="displaytime1" size="8" readonly
+                  class="textbox" value="--:--:--" />
+                <span>Time Left : </span><input type="text" id="displaytime2" name="displaytime2" size="8" readonly
+                  class="textbox" value="00:00:00" />
+              </b>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </form>
+
+  <!-- Tabs effect init (unchanged) -->
+  <script>
+    $(function () {
+      if ($("#accordion").length > 0) {
+        $("#accordion").tabs("#accordion div.pane", { tabs: 'h2', effect: 'slide', initialIndex: null });
+      }
+    });
+
+    $.tools = $.tools || { tabs: { addEffect: function () { } } };
+    if ($.tools.tabs && $.tools.tabs.addEffect) {
+      $.tools.tabs.addEffect("slide", function (i, done) {
+        this.getPanes().slideUp().css({ backgroundColor: "#b8128f" });
+        this.getPanes().eq(i).slideDown(function () {
+          $(this).css({ backgroundColor: 'transparent' });
+          done.call();
+        });
+      });
+    }
+  </script>
+
+  <!-- Slot header scroller -->
+  <div id="scroller-header" style="display:block;background:#fff;margin-top:30px;">
+    <div id="scroller-table" style="color:#FFF;">
+      <ul>
+        <li style="color:black !important;"><a href="#panel-1" rel="panel"
+            style="font-size:10px;color:black !important;">LOTO 11:00 A</a></li>
+        <li style="color:black !important;"><a href="#panel-2" rel="panel"
+            style="font-size:10px;color:black !important;">JACK 12:00 P</a></li>
+        <li style="color:black !important;"><a href="#panel-3" rel="panel"
+            style="font-size:10px;color:black !important;">LUCK 01:00 P</a></li>
+        <li style="color:black !important;"><a href="#panel-4" rel="panel"
+            style="font-size:10px;color:black !important;">QUEE 02:00 P</a></li>
+        <li style="color:black !important;"><a href="#panel-5" rel="panel"
+            style="font-size:10px;color:black !important;">KING 04:00 P</a></li>
+        <li style="color:black !important;"><a href="#panel-6" rel="panel"
+            style="font-size:10px;color:black !important;">STAR 06:00 P</a></li>
+        <li style="color:black !important;"><a href="#panel-7" rel="panel"
+            style="font-size:10px;color:black !important;">JACK 07:00 P</a></li>
+        <li style="color:black !important;"><a href="#panel-8" rel="panel"
+            style="font-size:10px;color:black !important;">LOTO 08:00 P</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Panels -->
+  <div id="scroller-body">
+    <div id="mask">
+      <div id="panel">
+        <div id="panel-1" class="panel"
+          style="height:400px;font-family:'Courier New', Courier, monospace;text-align:left;font-size:15px;">
+          <br />LOTO 11:00 AM (FRI)<br /><br />DRAW NO :219 DRAW DATE ON. <span id="date-1"></span><br /><br />
+          3DIGIT 1 ST PRIZE RS. 10000/-&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br />
+          3DIGIT 2 ND PRIZE RS. 1000/- &nbsp;&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br /><br /><br />
+        </div>
+        <div id="panel-2" class="panel"
+          style="height:400px;font-family:'Courier New', Courier, monospace;text-align:left;font-size:15px;">
+          <br />JACK 12:00 PM (FRI)<br /><br />DRAW NO :219 DRAW DATE ON. <span id="date-2"></span><br /><br />
+          3DIGIT 1 ST PRIZE RS. 10000/-&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br />
+          3DIGIT 2 ND PRIZE RS. 1000/- &nbsp;&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br /><br /><br />
+        </div>
+        <div id="panel-3" class="panel"
+          style="height:400px;font-family:'Courier New', Courier, monospace;text-align:left;font-size:15px;">
+          <br />LUCK 01:00 PM (FRI)<br /><br />DRAW NO :219 DRAW DATE ON. <span id="date-3"></span><br /><br />
+          3DIGIT 1 ST PRIZE RS. 10000/-&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br />
+          3DIGIT 2 ND PRIZE RS. 1000/- &nbsp;&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br /><br /><br />
+        </div>
+        <div id="panel-4" class="panel"
+          style="height:400px;font-family:'Courier New', Courier, monospace;text-align:left;font-size:15px;">
+          <br />QUEE 02:00 PM (FRI)<br /><br />DRAW NO :219 DRAW DATE ON. <span id="date-4"></span><br /><br />
+          3DIGIT 1 ST PRIZE RS. 10000/-&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br />
+          3DIGIT 2 ND PRIZE RS. 1000/- &nbsp;&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br /><br /><br />
+        </div>
+        <div id="panel-5" class="panel"
+          style="height:400px;font-family:'Courier New', Courier, monospace;text-align:left;font-size:15px;">
+          <br />KING 04:00 PM (FRI)<br /><br />DRAW NO :219 DRAW DATE ON. <span id="date-5"></span><br /><br />
+          3DIGIT 1 ST PRIZE RS. 10000/-&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br />
+          3DIGIT 2 ND PRIZE RS. 1000/- &nbsp;&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br /><br /><br />
+        </div>
+        <div id="panel-6" class="panel"
+          style="height:400px;font-family:'Courier New', Courier, monospace;text-align:left;font-size:15px;">
+          <br />STAR 06:00 PM (FRI)<br /><br />DRAW NO :219 DRAW DATE ON. <span id="date-6"></span><br /><br />
+          3DIGIT 1 ST PRIZE RS. 10000/-&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br />
+          3DIGIT 2 ND PRIZE RS. 1000/- &nbsp;&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br /><br /><br />
+        </div>
+        <div id="panel-7" class="panel"
+          style="height:400px;font-family:'Courier New', Courier, monospace;text-align:left;font-size:15px;">
+          <br />JACK 07:00 PM (FRI)<br /><br />DRAW NO :219 DRAW DATE ON. <span id="date-7"></span><br /><br />
+          3DIGIT 1 ST PRIZE RS. 10000/-&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br />
+          3DIGIT 2 ND PRIZE RS. 1000/- &nbsp;&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br /><br /><br />
+        </div>
+        <div id="panel-8" class="panel"
+          style="height:400px;font-family:'Courier New', Courier, monospace;text-align:left;font-size:15px;">
+          <br />LOTO 08:00 PM (FRI)<br /><br />DRAW NO :219 DRAW DATE ON. <span id="date-8"></span><br /><br />
+          3DIGIT 1 ST PRIZE RS. 10000/-&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br />
+          3DIGIT 2 ND PRIZE RS. 1000/- &nbsp;&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br /><br /><br />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase (compat, same as admin) -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+
+  <script>
+    // === REPLACE WITH YOUR REAL CONFIG ===
+    const firebaseConfig = {
+      apiKey: "AIzaSyBNl9NMqKrmYqY9WPG-v-jAFbiv5d-vef8",
+      authDomain: "jackspot-bd84f.firebaseapp.com",
+      databaseURL: "https://jackspot-bd84f-default-rtdb.firebaseio.com",
+      projectId: "jackspot-bd84f",
+      storageBucket: "jackspot-bd84f.firebasestorage.app",
+      messagingSenderId: "740333832481",
+      appId: "1:740333832481:web:89c6c084af318ed1c01660",
+      measurementId: "G-H4QH4TR65X"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    // Slots in order (24h) mapped to your panel ids
+    const SLOTS = [
+      { t: '11:00', id: 'panel-1' }, // LOTO
+      { t: '12:00', id: 'panel-2' }, // JACK
+      { t: '13:00', id: 'panel-3' }, // LUCK
+      { t: '14:00', id: 'panel-4' }, // QUEE
+      { t: '16:00', id: 'panel-5' }, // KING
+      { t: '18:00', id: 'panel-6' }, // STAR
+      { t: '19:00', id: 'panel-7' }, // JACK
+      { t: '20:00', id: 'panel-8' }, // LOTO
+    ];
+
+    // IST helpers
+    function nowIST() { return new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' })); }
+    function todayISTString() {
+      const d = nowIST();
+      const yyyy = d.getFullYear();
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      const dd = String(d.getDate()).padStart(2, '0');
+      return `${yyyy}-${mm}-${dd}`;
+    }
+    function istDateAt(hhmm) {
+      const [H, M] = hhmm.split(':').map(Number);
+      const d = nowIST();
+      d.setHours(H, M, 0, 0);
+      return d;
+    }
+
+    // Fill the "DRAW DATE ON." spans
+    (function fillDates() {
+      const dateStr = todayISTString().split('-').reverse().join('-'); // DD-MM-YYYY
+      for (let i = 1; i <= 8; i++) {
+        const el = document.getElementById('date-' + i);
+        if (el) el.textContent = dateStr;
+      }
+    })();
+
+    // Cache latest result per time from pushed entries (time -> {number, _k})
+    const latestByTime = Object.create(null);
+
+    function getPrizeAnchors(panelId) {
+      const p = document.getElementById(panelId);
+      if (!p) return [null, null];
+      const links = p.querySelectorAll('a');
+      return [links[0] || null, links[1] || null];
+    }
+
+    function renderPanel(panelId, number3) {
+      const [a3, a2] = getPrizeAnchors(panelId);
+      if (!a3 || !a2) return;
+      if (number3 && number3.length === 3) {
+        a3.textContent = number3;
+        a2.textContent = number3.slice(-2); // 2nd prize = last 2 digits
+      } else {
+        a3.textContent = '';
+        a2.textContent = '';
+      }
+    }
+
+    function renderAll() {
+      const now = nowIST();
+      SLOTS.forEach(slot => {
+        const gate = istDateAt(slot.t);
+        const data = latestByTime[slot.t]; // {number}
+        if (now >= gate && data && data.number && data.number.length === 3) {
+          renderPanel(slot.id, data.number);
+        } else {
+          // keep blank before time
+          renderPanel(slot.id, '');
+        }
+      });
+    }
+
+    // Countdown widgets
+    (function startCountdown() {
+      const drawEl = document.getElementById('displaytime1');
+      const leftEl = document.getElementById('displaytime2');
+
+      // Helper: convert "HH:MM" (24h) -> "hh:MM:SS AM/PM"
+      function to12HourWithSeconds(hhmm) {
+        let [h, m] = hhmm.split(':').map(Number);
+        const ampm = h >= 12 ? 'PM' : 'AM';
+        h = h % 12 || 12; // 0 -> 12
+        const hh = String(h).padStart(2, '0');
+        const mm = String(m).padStart(2, '0');
+        return `${hh}:${mm}:00 ${ampm}`;
+      }
+
+      function nextUpcoming(now) {
+        for (const s of SLOTS) {
+          const at = istDateAt(s.t);
+          if (at > now) return { s, at };
+        }
+        return null;
+      }
+
+      function tick() {
+        const now = nowIST();
+        const nxt = nextUpcoming(now);
+        if (!nxt) {
+          if (drawEl) drawEl.value = '--:--:--';
+          if (leftEl) leftEl.value = '00:00:00';
+          return;
+        }
+        // Show in 12-hour format with AM/PM
+        if (drawEl) drawEl.value = to12HourWithSeconds(nxt.s.t);
+
+        const secs = Math.max(0, Math.floor((nxt.at - now) / 1000));
+        const h = String(Math.floor(secs / 3600)).padStart(2, '0');
+        const m = String(Math.floor((secs % 3600) / 60)).padStart(2, '0');
+        const s = String(secs % 60).padStart(2, '0');
+        if (leftEl) leftEl.value = `${h}:${m}:${s}`;
+      }
+
+      tick();
+      setInterval(tick, 1000);
+    })();
+
+
+
+    // Listen for today's results (admin uses push())
+    function listenToday() {
+      const date = todayISTString();
+      db.ref('results/' + date).on('value', snap => {
+        // rebuild latestByTime from pushed children
+        for (const k in latestByTime) delete latestByTime[k];
+        const val = snap.val() || {};
+        // Sort keys so the lexicographically last push key for each time is "latest"
+        Object.keys(val).sort().forEach(childKey => {
+          const item = val[childKey] || {};
+          const t = item.time;
+          const n = (item.number || '').toString().replace(/\D/g, '').slice(0, 3);
+          if (!t) return;
+          const prev = latestByTime[t];
+          if (!prev || childKey > (prev._k || '')) {
+            latestByTime[t] = { number: n, _k: childKey };
+          }
+        });
+        renderAll();
+      });
+    }
+
+    // Re-render each second so panels flip exactly when time passes
+    setInterval(renderAll, 1000);
+
+    // Go!
+    listenToday();
+  </script>
+</body>
+
+</html>

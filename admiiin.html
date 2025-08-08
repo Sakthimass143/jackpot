@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+    <script src="auth.js"></script>
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            /* background: linear-gradient(to bottom right, #d9f3ff, #ecfaff); */
+            background-image: url('img/admin-bg.png');
+            background-repeat: no-repeat;
+            color: #1a1a1a;
+            min-height: 110vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            background-size: cover;
+
+        }
+
+        .shows-grid #shows-wrapper {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(220px, 1fr));
+            gap: 12px;
+        }
+
+        @media (min-width: 700px) {
+            .shows-grid #shows-wrapper {
+                grid-template-columns: repeat(2, minmax(180px, 1fr));
+            }
+        }
+
+        .show-card {
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid #e6edf5;
+            border-radius: 10px;
+            padding: 8px;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+        }
+
+        .show-label {
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: #111827;
+        }
+
+        .show-input {
+            width: 85%;
+            padding: 10px 12px;
+            border: 1px solid #cfd8e3;
+            border-radius: 8px;
+            font-size: 16px;
+            letter-spacing: 2px;
+            text-align: center;
+            outline: none;
+        }
+
+        .show-input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, .15);
+        }
+
+        #save-btn {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        #save-btn:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+        }
+
+        #status {
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        .form-container {
+            background: linear-gradient(#833AB4,#FD1D1D,#FCB045);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 15%;
+        }
+
+        @media (max-width: 768px) {
+            .form-container {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 468px) {
+            .form-container {
+                width: 85%;
+                margin-left: 6%;
+            }
+
+            .show-card {
+                width: 80% !important;
+            }
+        }
+
+        @media (max-width: 390px) {
+            .form-container {
+                width: 90%;
+                margin-left: 5%;
+            }
+
+            .show-card {
+                width: 80% !important;
+            }
+
+            .shows-grid #shows-wrapper {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(180px, 1fr));
+                gap: 5px;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-input {
+            width: 90%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .btn-container {
+            text-align: center;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+
+<body onload="protectAdminPage()">
+    <h2 style="color: white;">JACKPOT-COM ADMIN</h2>
+    <section class="draw-section fade-in">
+        <div class="form-container">
+            <div class="form-group">
+                <label for="date">Select Date</label>
+                <input type="date" id="date" class="form-input">
+            </div>
+
+            <div class="form-group">
+                <h4>Update Result</h4>
+
+                <div class="shows-grid">
+                    <!-- Inputs generated by JS; this is just the container -->
+                    <div id="shows-wrapper"></div>
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 12px;">
+                <button id="save-btn">save</button>
+            </div>
+
+            <p id="status"></p>
+        </div>
+    </section>
+
+    <script>
+        // Keep using your existing compat SDKs already loaded above
+        const db = firebase.database();
+
+        // Define the 8 shows with their 24h time values
+        const shows = [
+            { key: '1', label: 'Show 1 (11:00)', time: '11:00' },
+            { key: '2', label: 'Show 2 (12:00)', time: '12:00' },
+            { key: '4', label: 'Show 4 (01:00 PM)', time: '13:00' },
+            { key: '5', label: 'Show 5 (02:00 PM)', time: '14:00' },
+            { key: '6', label: 'Show 6 (04:00 PM)', time: '16:00' },
+            { key: '7', label: 'Show 7 (06:00 PM)', time: '18:00' },
+            { key: '8', label: 'Show 8 (07:00 PM)', time: '19:00' },
+            { key: '8', label: 'Show 8 (08:00 PM)', time: '20:00' },
+        ];
+
+        const statusEl = document.getElementById('status');
+        const wrapper = document.getElementById('shows-wrapper');
+        const saveBtn = document.getElementById('save-btn');
+
+        // Auto-fill today's date once (optional)
+        (function setToday() {
+            const dateEl = document.getElementById('date');
+            if (!dateEl.value) {
+                const today = new Date();
+                const yyyy = today.getFullYear();
+                const mm = String(today.getMonth() + 1).padStart(2, '0');
+                const dd = String(today.getDate()).padStart(2, '0');
+                dateEl.value = `${yyyy}-${mm}-${dd}`;
+            }
+        })();
+
+        // Build the 8 inputs
+        function buildShowInputs() {
+            wrapper.innerHTML = '';
+            shows.forEach(s => {
+                const card = document.createElement('div');
+                card.className = 'show-card';
+
+                const label = document.createElement('div');
+                label.className = 'show-label';
+                label.textContent = s.label;
+
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.className = 'show-input';
+                input.id = `show-input-${s.key}`;
+                input.inputMode = 'numeric';     // mobile numeric keypad
+                input.autocomplete = 'off';
+                input.maxLength = 3;             // hard cap
+                input.placeholder = '';
+
+                // Enforce digits-only & max 3 (typing & paste)
+                input.addEventListener('input', () => {
+                    const digits = input.value.replace(/\D/g, '').slice(0, 3);
+                    input.value = digits;
+                });
+
+                card.appendChild(label);
+                card.appendChild(input);
+                wrapper.appendChild(card);
+            });
+        }
+        buildShowInputs();
+
+        // Save handler: saves all filled inputs (length === 3)
+        saveBtn.addEventListener('click', async () => {
+            const date = document.getElementById('date').value;
+            if (!date) {
+                statusEl.style.color = 'red';
+                statusEl.textContent = '❌ Please select a date.';
+                return;
+            }
+
+            // Collect entries to save
+            const payloads = [];
+            shows.forEach(s => {
+                const val = document.getElementById(`show-input-${s.key}`).value.trim();
+                if (val.length === 3) {
+                    payloads.push({ time: s.time, number: val });
+                }
+            });
+
+            if (payloads.length === 0) {
+                statusEl.style.color = 'red';
+                statusEl.textContent = '❌ Enter at least one 3-digit number.';
+                return;
+            }
+
+            saveBtn.disabled = true;
+            statusEl.style.color = '#111827';
+            statusEl.textContent = 'Saving…';
+
+            try {
+                // Keep your existing schema: push each result under results/<date>
+                const writes = payloads.map(p => db.ref('results/' + date).push(p));
+                await Promise.all(writes);
+
+                statusEl.style.color = 'green';
+                statusEl.textContent = `✅ Saved ${payloads.length} show(s) successfully!`;
+
+                // Clear only the ones we saved
+                payloads.forEach(p => {
+                    const show = shows.find(s => s.time === p.time);
+                    if (show) document.getElementById(`show-input-${show.key}`).value = '';
+                });
+            } catch (err) {
+                statusEl.style.color = 'red';
+                statusEl.textContent = '❌ Error: ' + err.message;
+            } finally {
+                saveBtn.disabled = false;
+            }
+        });
+
+        // OPTIONAL: If you want to prevent duplicate entries per show for a date,
+        // switch to this pattern per item instead of push():
+        //
+        // await db.ref(`results/${date}/${p.time.replace(':','-')}`).set({ number: p.number });
+        //
+        // NOTE: That changes your DB structure (one node per time). Tell me if you want this
+        // and I’ll adjust the “Previous/Today Result” pages accordingly.
+    </script>
+</body>
+
+</html>
