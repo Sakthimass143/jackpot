@@ -12,6 +12,13 @@ const firebaseConfig = {
     measurementId: "G-H4QH4TR65X"
 };
 
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
+
+// Now db is defined after init
+const db = firebase.database();
+
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 

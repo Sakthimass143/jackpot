@@ -61,10 +61,12 @@
 
     body {
       font-family: "Lucida Grande", "bitstream vera sans", "trebuchet ms", sans-serif, verdana;
-      background-color: #fe4800;
-      background-image: url(img/innerwrapbg3.jpg);
-      margin: 0;
+      background-image: url("img/innerwrapbg3.jpg");
       background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+      margin: 0;
     }
 
     a:active {
@@ -101,6 +103,94 @@
       border: none;
       color: none;
     }
+
+    /* ========= MOBILE-ONLY FIXES (no design change) ========= */
+    @media (max-width: 768px) {
+
+      /* Top nav: keep your skins/dividers, just allow sideways scroll */
+      ul#saturday {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
+        height: auto;
+        /* allow natural height */
+      }
+
+      ul#saturday li {
+        float: none;
+        display: inline-block;
+      }
+
+      /* same look, inline flow */
+      ul#saturday li a {
+        padding: 10px 14px 0 14px;
+        /* a touch tighter so it fits */
+        height: auto;
+        /* no hard height on small screens */
+        background-position: top right;
+        /* keep your divider position */
+      }
+
+      /* Timer block inside the nav: prevent overflow */
+      ul#saturday .textbox {
+        font-size: 16px;
+        line-height: 1.2;
+      }
+
+      ul#saturday .textbox span {
+        display: inline-block;
+        margin-right: 4px;
+      }
+
+      /* Header chips row: make it horizontally scrollable */
+      #scroller-table ul {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 8px 10px;
+        margin: 0;
+      }
+
+      #scroller-table ul li {
+        flex: 0 0 auto;
+        /* keep each chip’s look, just don’t wrap */
+      }
+
+      /* Panels: prevent horizontal overflow while keeping your inline styles */
+      #scroller-body {
+        padding: 0 8px;
+      }
+
+      .panel {
+        box-sizing: border-box;
+        word-wrap: break-word;
+        overflow-wrap: anywhere;
+        font-size: 14px;
+        /* tiny downscale to avoid wrapping explosions */
+      }
+
+      /* Images should never overflow */
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+
+    /* Extra-small phones: keep values readable but compact */
+    @media (max-width: 420px) {
+      ul#saturday .textbox {
+        font-size: 14px;
+      }
+
+      #scroller-table ul {
+        gap: 6px;
+      }
+
+      .panel {
+        font-size: 13px;
+      }
+    }
   </style>
 </head>
 
@@ -118,6 +208,7 @@
             <li><a href="resultdownload" title="Download Result">Download Result</a></li>
             <li><a href="maintenance" title="">Schemes</a></li>
             <li><a href="maintenance" title="">Contact us</a></li>
+            <li><a href="chart" title="">Chart</a></li>
             <li>
               <b class="textbox" style="padding:10px 18px 0;height:24px;float:left;color:#874B46;">
                 <span>Draw Time : </span><input type="text" id="displaytime1" name="displaytime1" size="8" readonly
