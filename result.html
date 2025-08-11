@@ -13,7 +13,6 @@
 
   <link href="css/slidingtabs.css" rel="stylesheet" />
   <link href="css/easySlider.css" rel="stylesheet" />
-
   <style>
     ul#saturday {
       margin: 0;
@@ -58,6 +57,7 @@
       color: #fff;
       background: transparent url("img/bgON.gif") no-repeat top right;
     }
+
 
     body {
       font-family: "Lucida Grande", "bitstream vera sans", "trebuchet ms", sans-serif, verdana;
@@ -104,93 +104,70 @@
       color: none;
     }
 
-    /* ========= MOBILE-ONLY FIXES (no design change) ========= */
-    @media (max-width: 768px) {
-
-      /* Top nav: keep your skins/dividers, just allow sideways scroll */
-      ul#saturday {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        white-space: nowrap;
-        height: auto;
-        /* allow natural height */
-      }
-
-      ul#saturday li {
-        float: none;
-        display: inline-block;
-      }
-
-      /* same look, inline flow */
-      ul#saturday li a {
-        padding: 10px 14px 0 14px;
-        /* a touch tighter so it fits */
-        height: auto;
-        /* no hard height on small screens */
-        background-position: top right;
-        /* keep your divider position */
-      }
-
-      /* Timer block inside the nav: prevent overflow */
-      ul#saturday .textbox {
-        font-size: 16px;
-        line-height: 1.2;
-      }
-
-      ul#saturday .textbox span {
-        display: inline-block;
-        margin-right: 4px;
-      }
-
-      /* Header chips row: make it horizontally scrollable */
-      #scroller-table ul {
-        display: flex;
-        gap: 8px;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        padding: 8px 10px;
-        margin: 0;
-      }
-
-      #scroller-table ul li {
-        flex: 0 0 auto;
-        /* keep each chip’s look, just don’t wrap */
-      }
-
-      /* Panels: prevent horizontal overflow while keeping your inline styles */
-      #scroller-body {
-        padding: 0 8px;
-      }
-
-      .panel {
-        box-sizing: border-box;
-        word-wrap: break-word;
-        overflow-wrap: anywhere;
-        font-size: 14px;
-        /* tiny downscale to avoid wrapping explosions */
-      }
-
-      /* Images should never overflow */
-      img {
-        max-width: 100%;
-        height: auto;
-      }
+    .panel-list {
+      color: black !important;
     }
 
-    /* Extra-small phones: keep values readable but compact */
-    @media (max-width: 420px) {
-      ul#saturday .textbox {
-        font-size: 14px;
-      }
-
-      #scroller-table ul {
-        gap: 6px;
-      }
-
-      .panel {
-        font-size: 13px;
-      }
+    .panel-a {
+      font-size: 10px;
+      color: black !important;
     }
+
+    .panel {
+      height: 400px;
+      font-family: 'Courier New', Courier, monospace;
+      text-align: left;
+      font-size: 15px;
+    }
+
+/* ===== Responsive scaling for tablets and below ===== */
+@media (max-width: 768px) {
+  body {
+    zoom: 0.85; /* shrink everything proportionally */
+  }
+  ul#saturday {
+    font-size: 10px;
+    height: 30px;
+  }
+  ul#saturday li a {
+    padding: 8px 12px 0 12px;
+    height: 22px;
+    font-size: 10px;
+  }
+  .textbox {
+    font-size: 14px;
+  }
+  .label1 {
+    font-size: 12px;
+  }
+  .panel {
+    font-size: 12px;
+    height: auto;
+  }
+}
+
+/* ===== Extra scaling for small mobiles ===== */
+@media (max-width: 468px) {
+  body {
+    zoom: 0.75;
+  }
+  ul#saturday {
+    font-size: 9px;
+    height: 28px;
+  }
+  ul#saturday li a {
+    padding: 6px 8px 0 8px;
+    height: 20px;
+    font-size: 9px;
+  }
+  .textbox {
+    font-size: 12px;
+  }
+  .panel {
+    font-size: 11px;
+  }
+}
+
   </style>
 </head>
 
@@ -206,8 +183,8 @@
             <li><a href="index" title="Home">Home</a></li>
             <li><a href="result" title="Today Result">Today Result</a></li>
             <li><a href="resultdownload" title="Download Result">Download Result</a></li>
-            <li><a href="maintenance" title="">Schemes</a></li>
-            <li><a href="maintenance" title="">Contact us</a></li>
+            <li><a href="#" title="">Schemes</a></li>
+            <li><a href="#" title="">Contact us</a></li>
             <li><a href="chart" title="">Chart</a></li>
             <li>
               <b class="textbox" style="padding:10px 18px 0;height:24px;float:left;color:#874B46;">
@@ -247,22 +224,22 @@
   <div id="scroller-header" style="display:block;background:#fff;margin-top:30px;">
     <div id="scroller-table" style="color:#FFF;">
       <ul>
-        <li style="color:black !important;"><a href="#panel-1" rel="panel"
-            style="font-size:10px;color:black !important;">LOTO 11:00 A</a></li>
-        <li style="color:black !important;"><a href="#panel-2" rel="panel"
-            style="font-size:10px;color:black !important;">JACK 12:00 P</a></li>
-        <li style="color:black !important;"><a href="#panel-3" rel="panel"
-            style="font-size:10px;color:black !important;">LUCK 01:00 P</a></li>
-        <li style="color:black !important;"><a href="#panel-4" rel="panel"
-            style="font-size:10px;color:black !important;">QUEE 02:00 P</a></li>
-        <li style="color:black !important;"><a href="#panel-5" rel="panel"
-            style="font-size:10px;color:black !important;">KING 04:00 P</a></li>
-        <li style="color:black !important;"><a href="#panel-6" rel="panel"
-            style="font-size:10px;color:black !important;">STAR 06:00 P</a></li>
-        <li style="color:black !important;"><a href="#panel-7" rel="panel"
-            style="font-size:10px;color:black !important;">JACK 07:00 P</a></li>
-        <li style="color:black !important;"><a href="#panel-8" rel="panel"
-            style="font-size:10px;color:black !important;">LOTO 08:00 P</a></li>
+        <li class="panel-list"><a href="#panel-1" rel="panel" class="panel-a">LOTO 11:00
+            A</a></li>
+        <li class="panel-list"><a href="#panel-2" rel="panel" class="panel-a">JACK 12:00
+            P</a></li>
+        <li class="panel-list"><a href="#panel-3" rel="panel" class="panel-a">LUCK 01:00
+            P</a></li>
+        <li class="panel-list"><a href="#panel-4" rel="panel" class="panel-a">QUEE 02:00
+            P</a></li>
+        <li class="panel-list"><a href="#panel-5" rel="panel" class="panel-a">KING 04:00
+            P</a></li>
+        <li class="panel-list"><a href="#panel-6" rel="panel" class="panel-a">STAR 06:00
+            P</a></li>
+        <li class="panel-list"><a href="#panel-7" rel="panel" class="panel-a">JACK 07:00
+            P</a></li>
+        <li class="panel-list"><a href="#panel-8" rel="panel" class="panel-a">LOTO 08:00
+            P</a></li>
       </ul>
     </div>
   </div>
@@ -271,50 +248,42 @@
   <div id="scroller-body">
     <div id="mask">
       <div id="panel">
-        <div id="panel-1" class="panel"
-          style="height:400px;font-family:'Courier New', Courier, monospace;text-align:left;font-size:15px;">
+        <div id="panel-1" class="panel">
           <br />LOTO 11:00 AM (FRI)<br /><br />DRAW NO :219 DRAW DATE ON. <span id="date-1"></span><br /><br />
           3DIGIT 1 ST PRIZE RS. 10000/-&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br />
           3DIGIT 2 ND PRIZE RS. 1000/- &nbsp;&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br /><br /><br />
         </div>
-        <div id="panel-2" class="panel"
-          style="height:400px;font-family:'Courier New', Courier, monospace;text-align:left;font-size:15px;">
+        <div id="panel-2" class="panel">
           <br />JACK 12:00 PM (FRI)<br /><br />DRAW NO :219 DRAW DATE ON. <span id="date-2"></span><br /><br />
           3DIGIT 1 ST PRIZE RS. 10000/-&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br />
           3DIGIT 2 ND PRIZE RS. 1000/- &nbsp;&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br /><br /><br />
         </div>
-        <div id="panel-3" class="panel"
-          style="height:400px;font-family:'Courier New', Courier, monospace;text-align:left;font-size:15px;">
+        <div id="panel-3" class="panel">
           <br />LUCK 01:00 PM (FRI)<br /><br />DRAW NO :219 DRAW DATE ON. <span id="date-3"></span><br /><br />
           3DIGIT 1 ST PRIZE RS. 10000/-&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br />
           3DIGIT 2 ND PRIZE RS. 1000/- &nbsp;&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br /><br /><br />
         </div>
-        <div id="panel-4" class="panel"
-          style="height:400px;font-family:'Courier New', Courier, monospace;text-align:left;font-size:15px;">
+        <div id="panel-4" class="panel">
           <br />QUEE 02:00 PM (FRI)<br /><br />DRAW NO :219 DRAW DATE ON. <span id="date-4"></span><br /><br />
           3DIGIT 1 ST PRIZE RS. 10000/-&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br />
           3DIGIT 2 ND PRIZE RS. 1000/- &nbsp;&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br /><br /><br />
         </div>
-        <div id="panel-5" class="panel"
-          style="height:400px;font-family:'Courier New', Courier, monospace;text-align:left;font-size:15px;">
+        <div id="panel-5" class="panel">
           <br />KING 04:00 PM (FRI)<br /><br />DRAW NO :219 DRAW DATE ON. <span id="date-5"></span><br /><br />
           3DIGIT 1 ST PRIZE RS. 10000/-&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br />
           3DIGIT 2 ND PRIZE RS. 1000/- &nbsp;&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br /><br /><br />
         </div>
-        <div id="panel-6" class="panel"
-          style="height:400px;font-family:'Courier New', Courier, monospace;text-align:left;font-size:15px;">
+        <div id="panel-6" class="panel">
           <br />STAR 06:00 PM (FRI)<br /><br />DRAW NO :219 DRAW DATE ON. <span id="date-6"></span><br /><br />
           3DIGIT 1 ST PRIZE RS. 10000/-&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br />
           3DIGIT 2 ND PRIZE RS. 1000/- &nbsp;&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br /><br /><br />
         </div>
-        <div id="panel-7" class="panel"
-          style="height:400px;font-family:'Courier New', Courier, monospace;text-align:left;font-size:15px;">
+        <div id="panel-7" class="panel">
           <br />JACK 07:00 PM (FRI)<br /><br />DRAW NO :219 DRAW DATE ON. <span id="date-7"></span><br /><br />
           3DIGIT 1 ST PRIZE RS. 10000/-&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br />
           3DIGIT 2 ND PRIZE RS. 1000/- &nbsp;&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br /><br /><br />
         </div>
-        <div id="panel-8" class="panel"
-          style="height:400px;font-family:'Courier New', Courier, monospace;text-align:left;font-size:15px;">
+        <div id="panel-8" class="panel">
           <br />LOTO 08:00 PM (FRI)<br /><br />DRAW NO :219 DRAW DATE ON. <span id="date-8"></span><br /><br />
           3DIGIT 1 ST PRIZE RS. 10000/-&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br />
           3DIGIT 2 ND PRIZE RS. 1000/- &nbsp;&nbsp;&nbsp;<a style="color:#0000CC"></a><br /><br /><br /><br />
