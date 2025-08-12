@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>JACKPOT-IN</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    :root{
+      --max-content: 1000px;
+      --brand-grad: linear-gradient(#ffd83a,#c5a200);
+      --menu-grad:  linear-gradient(#d7efe7,#9cc9bb);
+      --menu-top:   #c0e2d4;
+      --menu-btm:   #336666;
+      --menu-text:  #874B46;
+      --time-color: #6d377d;
+      --slot-h: 26px;
+      --card-shadow: 0 2px 10px rgba(0,0,0,.06);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;color:#111;
+      font-family:"Lucida Grande","Trebuchet MS",Arial,Helvetica,sans-serif,verdana;
+      background:#0b0b0b url("img/innerwrapbg3.jpg") center/cover fixed no-repeat;
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+
+    /* ===== Brand band ===== */
+    .brand{background:var(--brand-grad)}
+    .brand img{display:block;width:100%;height:auto}
+
+    /* ===== NAVBAR: fits in one row on ANY screen ===== */
+    .menu{background:var(--menu-grad);border-top:1px solid var(--menu-top);border-bottom:4px solid var(--menu-btm)}
+    .menu-inner{
+      max-width:var(--max-content);margin:0 auto;height:36px;overflow:hidden;padding:0 6px;
+      display:flex;align-items:stretch;
+    }
+    .menu ul{
+      margin:0;padding:0;list-style:none;width:100%;
+      display:flex;align-items:stretch;gap:0;min-width:0;height:100%;
+    }
+    /* Each item takes equal space so the row ALWAYS fits */
+    .menu li{flex:1 1 0;min-width:0;height:100%}
+    .menu a{
+      display:block;height:100%;width:100%;text-align:center;white-space:nowrap;
+      /* Tighter padding + auto-scaling font so it never spills */
+      padding-top:clamp(6px,1.1vw,10px);
+      padding-left:clamp(6px,1vw,14px);
+      padding-right:clamp(6px,1vw,14px);
+      line-height:calc(36px - clamp(6px,1.1vw,10px));
+      font:bold clamp(9px,1.2vw,11.5px)/1 Helvetica,Arial,Verdana,sans-serif;
+      letter-spacing:.2px;
+      color:var(--menu-text);
+      text-transform:uppercase;
+      background:transparent url("img/bgDIVIDER.gif") no-repeat top right;
+    }
+    .menu a:hover{background-image:url("img/bgHOVER.gif")}
+
+    /* ultra small phones */
+    @media (max-width:380px){
+      .menu-inner{height:32px}
+      .menu a{line-height:calc(32px - clamp(5px,1vw,8px));font-size:clamp(8px,3.2vw,10px)}
+    }
+
+    /* ===== Purple time row ===== */
+    .timebar{
+      max-width:var(--max-content);margin:10px auto 6px;padding:0 12px;
+      display:flex;gap:34px;align-items:center;color:var(--time-color);font-weight:bold;letter-spacing:.4px;
+    }
+    .timebar input{
+      border:none;background:transparent;color:var(--time-color);
+      font:inherit;width:9ch;text-align:center;
+    }
+    @media (max-width:520px){
+      .timebar{gap:14px;flex-wrap:wrap}
+      .timebar input{width:10ch}
+    }
+
+    /* ===== Time selector (plain text, single row) ===== */
+    .slotbar-wrap{max-width:var(--max-content);margin:0 auto;padding:0 12px}
+    .slotbar{
+      height:var(--slot-h);display:grid;grid-template-columns:repeat(8,1fr);
+      align-items:center;padding:0;margin:0;background:transparent;border:none;overflow:hidden;
+    }
+    .slotbar a{
+      text-align:center;color:#222;line-height:1;white-space:nowrap;
+      font-size:clamp(8.5px,1.45vw,11px);padding:0 2px;
+    }
+    .slotbar a.current{font-weight:bold;text-decoration:underline}
+
+    /* ===== White card ===== */
+    .card-wrap{max-width:var(--max-content);margin:12px auto 20px;padding:0 12px}
+    .card{background:#fff;border-radius:0;box-shadow:var(--card-shadow);min-height:clamp(240px,44vh,520px);padding:18px 20px;overflow:hidden}
+    .panel{display:none;white-space:pre-wrap;font-family:"Courier New",Courier,monospace;font-size:clamp(12px,1.9vw,16px);color:#6d6d6d;line-height:1.7}
+    .panel.active{display:block;animation:slideIn .35s ease both}
+    @keyframes slideIn{from{transform:translateX(80px);opacity:0}to{transform:translateX(0);opacity:1}}
+  </style>
+</head>
+<body>
+
+  <!-- Brand banner -->
+  <div class="brand"><img src="img/top1.jpg" alt="JACKPOT IN"></div>
+
+  <!-- Navbar -->
+  <nav class="menu">
+    <div class="menu-inner">
+      <ul>
+        <li><a class="active" href="index">Home</a></li>
+        <li><a href="result">Today Result</a></li>
+        <li><a href="resultdownload">Download Result</a></li>
+        <li><a href="#">Schemes</a></li>
+        <li><a href="#">Contact us</a></li>
+        <li><a href="chart">Chart</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Purple time -->
+  <div class="timebar">
+    <div>DRAW TIME : <input id="displaytime1" readonly value="--:--:--"></div>
+    <div>TIME LEFT : <input id="displaytime2" readonly value="00:00:00"></div>
+  </div>
+
+  <!-- Time selector -->
+  <div class="slotbar-wrap">
+    <div class="slotbar" id="slotbar">
+      <a href="#panel-1" rel="panel">LOTO 11:00 A</a>
+      <a href="#panel-2" rel="panel">JACK 12:00 P</a>
+      <a href="#panel-3" rel="panel">LUCK 01:00 P</a>
+      <a href="#panel-4" rel="panel">QUEE 02:00 P</a>
+      <a href="#panel-5" rel="panel">KING 04:00 P</a>
+      <a href="#panel-6" rel="panel">STAR 06:00 P</a>
+      <a href="#panel-7" rel="panel">JACK 07:00 P</a>
+      <a href="#panel-8" rel="panel">LOTO 08:00 P</a>
+    </div>
+  </div>
+
+  <!-- White card -->
+  <div class="card-wrap">
+    <div class="card">
+      <div id="panel-1" class="panel active">
+LOTO 11:00 AM (TUE)
+
+DRAW NO :223 DRAW DATE ON. <span id="date-1"></span>
+
+3DIGIT 1 ST PRIZE RS. 10000/-  <a style="color:#0000CC"></a>
+
+3DIGIT 2 ND PRIZE RS. 1000/-   <a style="color:#0000CC"></a>
+      </div>
+      <div id="panel-2" class="panel">
+JACK 12:00 PM (TUE)
+
+DRAW NO :223 DRAW DATE ON. <span id="date-2"></span>
+
+3DIGIT 1 ST PRIZE RS. 10000/-  <a style="color:#0000CC"></a>
+
+3DIGIT 2 ND PRIZE RS. 1000/-   <a style="color:#0000CC"></a>
+      </div>
+      <div id="panel-3" class="panel">
+LUCK 01:00 PM (TUE)
+
+DRAW NO :223 DRAW DATE ON. <span id="date-3"></span>
+
+3DIGIT 1 ST PRIZE RS. 10000/-  <a style="color:#0000CC"></a>
+
+3DIGIT 2 ND PRIZE RS. 1000/-   <a style="color:#0000CC"></a>
+      </div>
+      <div id="panel-4" class="panel">
+QUEE 02:00 PM (TUE)
+
+DRAW NO :223 DRAW DATE ON. <span id="date-4"></span>
+
+3DIGIT 1 ST PRIZE RS. 10000/-  <a style="color:#0000CC"></a>
+
+3DIGIT 2 ND PRIZE RS. 1000/-   <a style="color:#0000CC"></a>
+      </div>
+      <div id="panel-5" class="panel">
+KING 04:00 PM (TUE)
+
+DRAW NO :223 DRAW DATE ON. <span id="date-5"></span>
+
+3DIGIT 1 ST PRIZE RS. 10000/-  <a style="color:#0000CC"></a>
+
+3DIGIT 2 ND PRIZE RS. 1000/-   <a style="color:#0000CC"></a>
+      </div>
+      <div id="panel-6" class="panel">
+STAR 06:00 PM (TUE)
+
+DRAW NO :223 DRAW DATE ON. <span id="date-6"></span>
+
+3DIGIT 1 ST PRIZE RS. 10000/-  <a style="color:#0000CC"></a>
+
+3DIGIT 2 ND PRIZE RS. 1000/-   <a style="color:#0000CC"></a>
+      </div>
+      <div id="panel-7" class="panel">
+JACK 07:00 PM (TUE)
+
+DRAW NO :223 DRAW DATE ON. <span id="date-7"></span>
+
+3DIGIT 1 ST PRIZE RS. 10000/-  <a style="color:#0000CC"></a>
+
+3DIGIT 2 ND PRIZE RS. 1000/-   <a style="color:#0000CC"></a>
+      </div>
+      <div id="panel-8" class="panel">
+LOTO 08:00 PM (TUE)
+
+DRAW NO :223 DRAW DATE ON. <span id="date-8"></span>
+
+3DIGIT 1 ST PRIZE RS. 10000/-  <a style="color:#0000CC"></a>
+
+3DIGIT 2 ND PRIZE RS. 1000/-   <a style="color:#0000CC"></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase (compat) -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+
+  <script>
+    /* Firebase init (same) */
+    const firebaseConfig = {
+      apiKey: "AIzaSyBNl9NMqKrmYqY9WPG-v-jAFbiv5d-vef8",
+      authDomain: "jackspot-bd84f.firebaseapp.com",
+      databaseURL: "https://jackspot-bd84f-default-rtdb.firebaseio.com",
+      projectId: "jackspot-bd84f",
+      storageBucket: "jackspot-bd84f.firebasestorage.app",
+      messagingSenderId: "740333832481",
+      appId: "1:740333832481:web:89c6c084af318ed1c01660",
+      measurementId: "G-H4QH4TR65X"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    const SLOTS = [
+      { t: '11:00', id: 'panel-1' },
+      { t: '12:00', id: 'panel-2' },
+      { t: '13:00', id: 'panel-3' },
+      { t: '14:00', id: 'panel-4' },
+      { t: '16:00', id: 'panel-5' },
+      { t: '18:00', id: 'panel-6' },
+      { t: '19:00', id: 'panel-7' },
+      { t: '20:00', id: 'panel-8' },
+    ];
+
+    const nowIST = () => new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Kolkata'}));
+    const todayISTString = () => { const d=nowIST(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+    const istDateAt = (hhmm) => { const [H,M]=hhmm.split(':').map(Number); const d=nowIST(); d.setHours(H,M,0,0); return d; }
+
+    (()=>{ const dateStr=todayISTString().split('-').reverse().join('-'); for(let i=1;i<=8;i++){ const el=document.getElementById('date-'+i); if(el) el.textContent=dateStr; } })();
+
+    const navLinks = Array.from(document.querySelectorAll('.slotbar a[rel="panel"]'));
+    function openPanelById(id){
+      document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+      const el=document.getElementById(id); if(el){ void el.offsetWidth; el.classList.add('active'); }
+      navLinks.forEach(a=>a.classList.remove('current'));
+      const link=navLinks.find(a=>a.getAttribute('href')==='#'+id); if(link){ link.classList.add('current'); }
+    }
+    navLinks.forEach(a=>{
+      a.addEventListener('click', e=>{
+        if(a.getAttribute('href')?.startsWith('#panel-')){
+          e.preventDefault();
+          openPanelById(a.getAttribute('href').substring(1));
+        }
+      });
+    });
+
+    const latestByTime = Object.create(null);
+    function getPrizeAnchors(panelId){ const p=document.getElementById(panelId); const links=p?p.querySelectorAll('a'):[]; return [links[0]||null, links[1]||null]; }
+    function renderPanel(panelId, number3){
+      const [a3,a2]=getPrizeAnchors(panelId); if(!a3||!a2) return;
+      if(number3&&number3.length===3){ a3.textContent=number3; a2.textContent=number3.slice(-2); }
+      else { a3.textContent=''; a2.textContent=''; }
+    }
+    function renderAll(){
+      const now=nowIST();
+      SLOTS.forEach(slot=>{
+        const gate=istDateAt(slot.t), data=latestByTime[slot.t];
+        if(now>=gate && data && data.number && data.number.length===3) renderPanel(slot.id,data.number);
+        else renderPanel(slot.id,'');
+      });
+    }
+
+    (function startCountdown(){
+      const drawEl=document.getElementById('displaytime1'), leftEl=document.getElementById('displaytime2');
+      const to12=(hhmm)=>{ let [h,m]=hhmm.split(':').map(Number); const am=h>=12?'PM':'AM'; h=h%12||12; return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:00 ${am}`; }
+      const nextUpcoming=(now)=>{ for(const s of SLOTS){ const at=istDateAt(s.t); if(at>now) return {s,at}; } return null; }
+      function tick(){
+        const now=nowIST(), nxt=nextUpcoming(now);
+        if(!nxt){ drawEl.value='--:--:--'; leftEl.value='00:00:00'; return; }
+        drawEl.value=to12(nxt.s.t);
+        const secs=Math.max(0,Math.floor((nxt.at-now)/1000));
+        const h=String(Math.floor(secs/3600)).padStart(2,'0');
+        const m=String(Math.floor((secs%3600)/60)).padStart(2,'0');
+        const s=String(secs%60).padStart(2,'0');
+        leftEl.value=`${h}:${m}:${s}`;
+      }
+      tick(); setInterval(tick,1000);
+    })();
+
+    function listenToday(){
+      const date=todayISTString();
+      db.ref('results/'+date).on('value', snap=>{
+        for(const k in latestByTime) delete latestByTime[k];
+        const val=snap.val()||{};
+        Object.keys(val).sort().forEach(childKey=>{
+          const item=val[childKey]||{}; const t=item.time;
+          const n=(item.number||'').toString().replace(/\D/g,'').slice(0,3);
+          if(!t) return;
+          const prev=latestByTime[t];
+          if(!prev || childKey>(prev._k||'')) latestByTime[t]={number:n,_k:childKey};
+        });
+        renderAll();
+      });
+    }
+    setInterval(renderAll,1000);
+    listenToday();
+
+    (function autoOpenCurrent(){
+      const now=nowIST(); let current=null;
+      for(const s of SLOTS){ if(istDateAt(s.t)<=now) current=s; else break; }
+      openPanelById(current?current.id:SLOTS[0].id);
+    })();
+  </script>
+</body>
+</html>
