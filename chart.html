@@ -236,7 +236,7 @@
             font-size: 0.95rem;
             background-color: white;
             transition: border-color 0.2s ease, box-shadow 0.2s ease;
-            
+
         }
 
         .filter-box input[type="month"]:focus {
@@ -263,6 +263,157 @@
 
         .filter-box button:active {
             transform: translateY(0);
+        }
+
+        #captureBox {
+            display: inline-block;
+            padding: 0;
+            margin: 0;
+            background: transparent;
+        }
+
+        :root {
+            --btn-bg-1: #6ee7f9;
+            --btn-bg-2: #3b82f6;
+            --btn-text: #0b1220;
+            --btn-glow: #60a5fa;
+            --btn-shadow: rgba(59, 130, 246, .5);
+        }
+
+        .btn-download {
+            -webkit-tap-highlight-color: transparent;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: .6rem;
+            padding: .9rem 1.15rem;
+            border: none;
+            border-radius: 14px;
+            font: 600 0.95rem/1 system-ui, Segoe UI, Roboto, Arial, sans-serif;
+            color: var(--btn-text);
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, .25), rgba(255, 255, 255, .05)) padding-box,
+                linear-gradient(135deg, var(--btn-bg-1), var(--btn-bg-2)) border-box;
+            border: 2px solid transparent;
+            box-shadow:
+                0 8px 24px -8px var(--btn-shadow),
+                inset 0 0 0 1px rgba(255, 255, 255, .25);
+            backdrop-filter: blur(6px) saturate(1.2);
+            cursor: pointer;
+            transition: transform .15s ease, box-shadow .2s ease, filter .2s ease;
+            overflow: hidden;
+        }
+
+        .btn-download .label {
+            white-space: nowrap
+        }
+
+        .btn-download .icon {
+            position: relative;
+            width: 18px;
+            height: 18px;
+            display: inline-block;
+        }
+
+        .btn-download .icon::before,
+        .btn-download .icon::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background: currentColor;
+        }
+
+        /* Arrow */
+        .btn-download .icon::before {
+            top: 2px;
+            width: 0;
+            height: 0;
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+            border-top: 8px solid currentColor;
+            background: none;
+        }
+
+        /* Tray */
+        .btn-download .icon::after {
+            bottom: 1px;
+            width: 16px;
+            height: 3px;
+            border-radius: 2px;
+        }
+
+        /* Hover / active */
+        .btn-download:hover {
+            box-shadow:
+                0 10px 28px -8px var(--btn-shadow),
+                0 0 0 6px rgba(96, 165, 250, .18),
+                inset 0 0 0 1px rgba(255, 255, 255, .28);
+            transform: translateY(-1px);
+        }
+
+        .btn-download:active {
+            transform: translateY(0);
+            filter: brightness(.98);
+        }
+
+        /* Focus visible */
+        .btn-download:focus-visible {
+            outline: none;
+            box-shadow:
+                0 0 0 3px white,
+                0 0 0 6px var(--btn-glow),
+                0 12px 32px -10px var(--btn-shadow);
+        }
+
+        /* Ripple */
+        .btn-download::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(120px 120px at var(--x, 50%) var(--y, 50%), rgba(255, 255, 255, .35), transparent 60%);
+            opacity: 0;
+            transition: opacity .25s ease;
+        }
+
+        .btn-download:hover::after {
+            opacity: .7
+        }
+
+        .btn-download:active::after {
+            opacity: 1;
+            transition: opacity .1s ease
+        }
+
+        /* Dark mode friendly */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --btn-text: #0b1220;
+            }
+        }
+
+        /* States (optional) */
+        .btn-download.is-loading {
+            pointer-events: none;
+        }
+
+        .btn-download.is-loading .label {
+            opacity: .0
+        }
+
+        .btn-download.is-loading .icon {
+            width: 16px;
+            height: 16px;
+            border: 2px solid currentColor;
+            border-right-color: transparent;
+            border-radius: 50%;
+            animation: spin .8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: translateX(-50%) rotate(360deg)
+            }
         }
     </style>
 </head>
@@ -301,29 +452,184 @@
                 <button id="loadBtn" type="button">Load</button>
             </div>
         </div>
-
-        <table class="month-chart">
-            <thead>
-                <tr class="top-banner">
-                    <th class="month-number" id="monthNumber"></th>
-                    <th colspan="9">spot + Kerala</th>
-                </tr>
-                <tr>
-                    <th class="month-head" id="monthAbbr">AUG</th>
-                    <th class="time-head">11AM</th>
-                    <th class="time-head">12PM</th>
-                    <th class="time-head">01PM</th>
-                    <th class="time-head">02PM</th>
-                    <th class="kerala-head">Kerala</th>
-                    <th class="time-head">04PM</th>
-                    <th class="time-head">06PM</th>
-                    <th class="time-head">07PM</th>
-                    <th class="time-head">08PM</th>
-                </tr>
-            </thead>
-            <tbody id="tbody"></tbody>
-        </table>
+        <div id="captureBox" class="download-chart">
+            <table class="month-chart">
+                <thead>
+                    <tr class="top-banner">
+                        <th class="month-number" id="monthNumber"></th>
+                        <th colspan="9">spot + Kerala</th>
+                    </tr>
+                    <tr>
+                        <th class="month-head" id="monthAbbr">AUG</th>
+                        <th class="time-head">11AM</th>
+                        <th class="time-head">12PM</th>
+                        <th class="time-head">01PM</th>
+                        <th class="time-head">02PM</th>
+                        <th class="kerala-head">Kerala</th>
+                        <th class="time-head">04PM</th>
+                        <th class="time-head">06PM</th>
+                        <th class="time-head">07PM</th>
+                        <th class="time-head">08PM</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody"></tbody>
+            </table>
+            <br>
+        </div>
+        <button id="downloadBtn" type="button" class="btn-download">
+            <span class="icon" aria-hidden="true"></span>
+            <span class="label">Download Image</span>
+        </button>
     </div>
+
+    <script>
+        /* ripple follows pointer */
+        const btn = document.getElementById('downloadBtn');
+        btn.addEventListener('pointermove', e => {
+            const r = btn.getBoundingClientRect();
+            btn.style.setProperty('--x', (e.clientX - r.left) + 'px');
+            btn.style.setProperty('--y', (e.clientY - r.top) + 'px');
+        });
+    </script>
+
+    <script src="https://unpkg.com/html-to-image@1.11.11/dist/html-to-image.umd.js"></script>
+    <!-- Load html-to-image library -->
+    <script src="https://unpkg.com/html-to-image@1.11.11/dist/html-to-image.umd.js"></script>
+
+    <script>
+        (() => {
+            // ===== CONFIG =====
+            const BUTTON_ID = 'downloadBtn';
+            const TABLE_SELECTOR = '.month-chart';        // capture only the table
+            const FILENAME_PREFIX = 'monthly-chart-';     // file name prefix
+            const PIXEL_RATIO = 3;                        // 2–4 for sharpness
+            const BG_COLOR = '#ffffff';                   // solid background (null for transparent)
+            const EXTRA_PADDING = '0 40px';               // top/bottom 0px, left/right 40px
+
+            const HTML_TO_IMAGE_CDN = 'https://unpkg.com/html-to-image@1.11.11/dist/html-to-image.umd.js';
+            const DOM_TO_IMAGE_CDN = 'https://unpkg.com/dom-to-image-more@3.2.0/dist/dom-to-image-more.min.js';
+
+            function loadScriptOnce(src) {
+                return new Promise((resolve, reject) => {
+                    if ([...document.scripts].some(s => s.src === src)) return resolve();
+                    const s = document.createElement('script');
+                    s.src = src;
+                    s.async = true;
+                    s.onload = resolve;
+                    s.onerror = () => reject(new Error('Failed to load ' + src));
+                    document.head.appendChild(s);
+                });
+            }
+
+            async function ensureCaptureLib() {
+                if (window.htmlToImage?.toPng) return 'htmlToImage';
+                try { await loadScriptOnce(HTML_TO_IMAGE_CDN); } catch (_) { }
+                if (window.htmlToImage?.toPng) return 'htmlToImage';
+
+                if (window.domtoimage?.toPng) return 'domtoimage';
+                try { await loadScriptOnce(DOM_TO_IMAGE_CDN); } catch (_) { }
+                if (window.domtoimage?.toPng) return 'domtoimage';
+
+                throw new Error('No capture library available');
+            }
+
+            async function waitForFonts() {
+                if (document.fonts && document.fonts.status !== 'loaded') {
+                    try { await document.fonts.ready; } catch (_) { }
+                }
+            }
+
+            // Create off-screen clone for clean capture
+            function makeTightClone(node) {
+                const wrap = document.createElement('div');
+                wrap.style.position = 'fixed';
+                wrap.style.left = '-10000px';
+                wrap.style.top = '-10000px';
+                wrap.style.display = 'inline-block';
+                wrap.style.background = BG_COLOR || 'transparent';
+                wrap.style.padding = EXTRA_PADDING; // extra width around table
+
+                const clone = node.cloneNode(true);
+                wrap.appendChild(clone);
+                document.body.appendChild(wrap);
+
+                const table = wrap.querySelector(TABLE_SELECTOR) || clone;
+                const rect = table.getBoundingClientRect();
+                table.style.width = rect.width + 'px';
+                table.style.margin = '0 auto'; // keep centered
+
+                return { wrap, table };
+            }
+
+            function removeTightClone(wrap) {
+                try { document.body.removeChild(wrap); } catch (_) { }
+            }
+
+            function getMonthText() {
+                return (document.getElementById('monthAbbr')?.textContent || 'MONTH').trim();
+            }
+
+            async function exportNow() {
+                const table = document.querySelector(TABLE_SELECTOR);
+                if (!table) {
+                    alert('Table not found on the page.');
+                    return;
+                }
+
+                const lib = await ensureCaptureLib();
+                await waitForFonts();
+                window.scrollTo({ top: 0 });
+
+                const oldPad = document.body.style.paddingTop;
+                document.body.style.paddingTop = '0px';
+
+                const { wrap, table: clonedTable } = makeTightClone(table);
+
+                const opts = {
+                    pixelRatio: PIXEL_RATIO,
+                    cacheBust: true,
+                    backgroundColor: BG_COLOR, // html-to-image
+                    bgcolor: BG_COLOR,         // dom-to-image
+                    style: { transform: 'none', zoom: 1 }
+                };
+
+                try {
+                    let dataUrl;
+                    if (lib === 'htmlToImage') {
+                        dataUrl = await window.htmlToImage.toPng(clonedTable, opts);
+                    } else {
+                        dataUrl = await window.domtoimage.toPng(clonedTable, opts);
+                    }
+
+                    const a = document.createElement('a');
+                    a.download = `${FILENAME_PREFIX}${getMonthText()}.png`;
+                    a.href = dataUrl;
+                    a.click();
+                } catch (err) {
+                    console.error('Export failed:', err);
+                    alert('Sorry, export failed. Check console for details.');
+                } finally {
+                    removeTightClone(wrap);
+                    document.body.style.paddingTop = oldPad;
+                }
+            }
+
+            function ready(fn) {
+                if (document.readyState !== 'loading') fn();
+                else document.addEventListener('DOMContentLoaded', fn);
+            }
+
+            ready(() => {
+                const btn = document.getElementById(BUTTON_ID);
+                if (!btn) {
+                    console.warn(`Button #${BUTTON_ID} not found; cannot bind export.`);
+                    return;
+                }
+                btn.addEventListener('click', exportNow);
+            });
+        })();
+    </script>
+
 
     <!-- Firebase init -->
     <script>
