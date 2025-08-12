@@ -28,36 +28,28 @@
             background-size: cover;
             background-attachment: fixed;
             background-position: center;
-            /* padding-top will be set by JS based on header height */
         }
 
         /* ===== FIXED HEADER ===== */
         form[name="timeform"] {
             position: fixed;
-            /* keep header visible */
             top: 0;
             left: 0;
             right: 0;
             width: 100%;
             z-index: 1000;
-            /* above page content */
             backdrop-filter: saturate(120%);
-            /* optional wash to ensure text stays readable over bg */
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, .85);
         }
 
         form[name="timeform"] table {
             width: 100%;
-            border-collapse: collapse;
+            border-collapse: collapse
         }
 
-        /* make nav full width */
+        /* ===== Nav ===== */
         ul#saturday {
             width: 100%;
-        }
-
-        /* ===== Nav (unchanged styles kept) ===== */
-        ul#saturday {
             margin: 0;
             padding: 0;
             list-style-type: none;
@@ -77,7 +69,7 @@
             display: block;
             float: left;
             margin: 0;
-            padding: 0;
+            padding: 0
         }
 
         ul#saturday li a {
@@ -91,20 +83,20 @@
         }
 
         ul#saturday li a:hover {
-            background: transparent url("img/bgHOVER.gif") no-repeat top right;
+            background: transparent url("img/bgHOVER.gif") no-repeat top right
         }
 
         ul#saturday li a.current,
         ul#saturday li a.current:hover {
             color: #fff;
-            background: transparent url("img/bgON.gif") no-repeat top right;
+            background: transparent url("img/bgON.gif") no-repeat top right
         }
 
-        /* ===== Layout wrapper so content isn’t edge-to-edge ===== */
+        /* ===== Layout wrapper ===== */
         .wrap {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 16px;
+            padding: 16px
         }
 
         /* ===== Table Theme ===== */
@@ -113,8 +105,7 @@
             border-collapse: collapse;
             font-family: Arial, Helvetica, sans-serif;
             margin: 4% auto;
-            background: #fff;
-            /* keeps numbers readable over bg */
+            background: #fff
         }
 
         .month-chart th,
@@ -125,65 +116,65 @@
             padding: 3px 6px;
             height: 26px;
             font-size: 14px;
-            line-height: 1;
+            line-height: 1
         }
 
         .top-banner th {
             background: #0f7a3a;
             color: #fff;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 14px
         }
 
         .month-head {
             background: #2e75b6;
             color: #fff;
             font-weight: 700;
-            width: 64px;
+            width: 64px
         }
 
         .month-number {
             background: #2e75b6 !important;
             color: #fff;
             font-weight: 700;
-            width: 64px;
+            width: 64px
         }
 
         .time-head {
             background: #fbe4d4;
             color: #c00000;
-            font-weight: 700;
+            font-weight: 700
         }
 
         .kerala-head {
             background: #fff;
             color: #c00000;
-            font-weight: 700;
+            font-weight: 700
         }
 
         .kerala-col {
             background: #fbe4d4;
             color: #c00000;
-            font-weight: 700;
+            font-weight: 700
         }
 
         .date-col {
             background: #fbe4d4 !important;
             color: #c00000;
-            font-weight: 700;
+            font-weight: 700
         }
 
         td.date-cell {
             color: #c00000;
-            font-weight: 700;
+            font-weight: 700
         }
 
         tbody tr:nth-child(even) td:not(.kerala-col) {
-            background: #ffffff;
+            background: #ffffff
         }
 
         tbody tr:nth-child(odd) td:not(.kerala-col) {
-            background: #ffffff;
+            background: #ffffff
         }
 
         @media (max-width:780px) {
@@ -192,7 +183,7 @@
             .month-chart td {
                 font-size: 12px;
                 height: 24px;
-                padding: 2px 4px;
+                padding: 2px 4px
             }
         }
 
@@ -205,7 +196,7 @@
             align-items: center;
             justify-content: space-between;
             gap: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, .05);
             font-family: 'Segoe UI', Arial, sans-serif;
             width: 85%;
             margin: 5%;
@@ -213,19 +204,19 @@
 
         .filter-box strong {
             font-size: 1.2rem;
-            color: #1f2937;
+            color: #1f2937
         }
 
         .filter-box .controls {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 10px
         }
 
         .filter-box label {
-            font-size: 0.95rem;
+            font-size: .95rem;
             color: #374151;
-            font-weight: 500;
+            font-weight: 500
         }
 
         .filter-box input[type="month"] {
@@ -233,15 +224,14 @@
             border-radius: 6px;
             border: 1px solid #cbd5e1;
             outline: none;
-            font-size: 0.95rem;
-            background-color: white;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
-
+            font-size: .95rem;
+            background: #fff;
+            transition: border-color .2s ease, box-shadow .2s ease;
         }
 
         .filter-box input[type="month"]:focus {
             border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, .2)
         }
 
         .filter-box button {
@@ -250,26 +240,19 @@
             border: none;
             border-radius: 6px;
             padding: 7px 14px;
-            font-size: 0.9rem;
+            font-size: .9rem;
             font-weight: 500;
             cursor: pointer;
-            transition: background 0.2s ease, transform 0.1s ease;
+            transition: background .2s ease, transform .1s ease;
         }
 
         .filter-box button:hover {
             background: linear-gradient(135deg, #1d4ed8, #1e40af);
-            transform: translateY(-1px);
+            transform: translateY(-1px)
         }
 
         .filter-box button:active {
-            transform: translateY(0);
-        }
-
-        #captureBox {
-            /* display: inline-block; */
-            padding: 0;
-            margin: 0;
-            background: transparent;
+            transform: translateY(0)
         }
 
         :root {
@@ -277,7 +260,7 @@
             --btn-bg-2: #3b82f6;
             --btn-text: #0b1220;
             --btn-glow: #60a5fa;
-            --btn-shadow: rgba(59, 130, 246, .5);
+            --btn-shadow: rgba(59, 130, 246, .5)
         }
 
         .btn-download {
@@ -289,15 +272,12 @@
             padding: .9rem 1.15rem;
             border: none;
             border-radius: 14px;
-            font: 600 0.95rem/1 system-ui, Segoe UI, Roboto, Arial, sans-serif;
+            font: 600 .95rem/1 system-ui, Segoe UI, Roboto, Arial, sans-serif;
             color: var(--btn-text);
-            background:
-                linear-gradient(180deg, rgba(255, 255, 255, .25), rgba(255, 255, 255, .05)) padding-box,
+            background: linear-gradient(180deg, rgba(255, 255, 255, .25), rgba(255, 255, 255, .05)) padding-box,
                 linear-gradient(135deg, var(--btn-bg-1), var(--btn-bg-2)) border-box;
             border: 2px solid transparent;
-            box-shadow:
-                0 8px 24px -8px var(--btn-shadow),
-                inset 0 0 0 1px rgba(255, 255, 255, .25);
+            box-shadow: 0 8px 24px -8px var(--btn-shadow), inset 0 0 0 1px rgba(255, 255, 255, .25);
             backdrop-filter: blur(6px) saturate(1.2);
             cursor: pointer;
             transition: transform .15s ease, box-shadow .2s ease, filter .2s ease;
@@ -312,7 +292,7 @@
             position: relative;
             width: 18px;
             height: 18px;
-            display: inline-block;
+            display: inline-block
         }
 
         .btn-download .icon::before,
@@ -321,10 +301,9 @@
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            background: currentColor;
+            background: currentColor
         }
 
-        /* Arrow */
         .btn-download .icon::before {
             top: 2px;
             width: 0;
@@ -332,48 +311,38 @@
             border-left: 7px solid transparent;
             border-right: 7px solid transparent;
             border-top: 8px solid currentColor;
-            background: none;
+            background: none
         }
 
-        /* Tray */
         .btn-download .icon::after {
             bottom: 1px;
             width: 16px;
             height: 3px;
-            border-radius: 2px;
+            border-radius: 2px
         }
 
-        /* Hover / active */
         .btn-download:hover {
-            box-shadow:
-                0 10px 28px -8px var(--btn-shadow),
-                0 0 0 6px rgba(96, 165, 250, .18),
-                inset 0 0 0 1px rgba(255, 255, 255, .28);
-            transform: translateY(-1px);
+            box-shadow: 0 10px 28px -8px var(--btn-shadow), 0 0 0 6px rgba(96, 165, 250, .18), inset 0 0 0 1px rgba(255, 255, 255, .28);
+            transform: translateY(-1px)
         }
 
         .btn-download:active {
             transform: translateY(0);
-            filter: brightness(.98);
+            filter: brightness(.98)
         }
 
-        /* Focus visible */
         .btn-download:focus-visible {
             outline: none;
-            box-shadow:
-                0 0 0 3px white,
-                0 0 0 6px var(--btn-glow),
-                0 12px 32px -10px var(--btn-shadow);
+            box-shadow: 0 0 0 3px #fff, 0 0 0 6px var(--btn-glow), 0 12px 32px -10px var(--btn-shadow)
         }
 
-        /* Ripple */
         .btn-download::after {
             content: "";
             position: absolute;
             inset: 0;
             background: radial-gradient(120px 120px at var(--x, 50%) var(--y, 50%), rgba(255, 255, 255, .35), transparent 60%);
             opacity: 0;
-            transition: opacity .25s ease;
+            transition: opacity .25s ease
         }
 
         .btn-download:hover::after {
@@ -384,48 +353,15 @@
             opacity: 1;
             transition: opacity .1s ease
         }
-
-        /* Dark mode friendly */
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --btn-text: #0b1220;
-            }
-        }
-
-        /* States (optional) */
-        .btn-download.is-loading {
-            pointer-events: none;
-        }
-
-        .btn-download.is-loading .label {
-            opacity: .0
-        }
-
-        .btn-download.is-loading .icon {
-            width: 16px;
-            height: 16px;
-            border: 2px solid currentColor;
-            border-right-color: transparent;
-            border-radius: 50%;
-            animation: spin .8s linear infinite;
-        }
-
-        @keyframes spin {
-            to {
-                transform: translateX(-50%) rotate(360deg)
-            }
-        }
     </style>
 </head>
 
 <body style="text-align:center">
-    <!-- HEADER (now fixed) -->
+    <!-- HEADER -->
     <form name="timeform">
         <table border="0" cellspacing="0" cellpadding="0">
             <tr>
-                <th scope="col">
-                    <img src="img/top1.jpg" width="100%" height="120" alt="Header" />
-                </th>
+                <th scope="col"><img src="img/top1.jpg" width="100%" height="120" alt="Header" /></th>
             </tr>
             <tr align="center">
                 <td>
@@ -446,12 +382,11 @@
         <div class="filter-box">
             <strong>Monthly Chart</strong>
             <div class="controls">
-                <label>Month:
-                    <input type="month" id="monthPicker">
-                </label>
+                <label>Month: <input type="month" id="monthPicker"></label>
                 <button id="loadBtn" type="button">Load</button>
             </div>
         </div>
+
         <div id="captureBox" class="download-chart">
             <table class="month-chart">
                 <thead>
@@ -476,6 +411,7 @@
             </table>
             <br>
         </div>
+
         <button id="downloadBtn" type="button" class="btn-download">
             <span class="icon" aria-hidden="true"></span>
             <span class="label">Download Image</span>
@@ -492,113 +428,138 @@
         });
     </script>
 
-    <script src="https://unpkg.com/html-to-image@1.11.11/dist/html-to-image.umd.js"></script>
-    <!-- Load html-to-image library -->
+    <!-- html-to-image (once) -->
     <script src="https://unpkg.com/html-to-image@1.11.11/dist/html-to-image.umd.js"></script>
 
+    <!-- EXACT 1080×1137 EXPORT -->
+    <!-- EXACT 1080×1137 EXPORT (stable layout, no right/left gaps) -->
+    <!-- EXACT 1080×1137 EXPORT (lock live width, no collapse) -->
     <script>
         (() => {
-            // ===== CONFIG =====
             const BUTTON_ID = 'downloadBtn';
-            const TABLE_SELECTOR = '.month-chart';        // capture only the table
-            const FILENAME_PREFIX = 'monthly-chart-';     // file name prefix
-            const PIXEL_RATIO = 3;                        // 2–4 for sharpness
-            const BG_COLOR = '#ffffff';                   // solid background (null for transparent)
-            const EXTRA_PADDING = '0 40px';               // top/bottom 0px, left/right 40px
+            const CAPTURE_SELECTOR = '#captureBox';   // wrapper that contains the table
+            const TABLE_SELECTOR = '.month-chart';
+            const FILENAME_PREFIX = 'monthly-chart-';
+            const BG_COLOR = '#ffffff';
+            const TARGET_WIDTH = 1080;
+            const TARGET_HEIGHT = 1137;
 
             const HTML_TO_IMAGE_CDN = 'https://unpkg.com/html-to-image@1.11.11/dist/html-to-image.umd.js';
             const DOM_TO_IMAGE_CDN = 'https://unpkg.com/dom-to-image-more@3.2.0/dist/dom-to-image-more.min.js';
 
             function loadScriptOnce(src) {
-                return new Promise((resolve, reject) => {
-                    if ([...document.scripts].some(s => s.src === src)) return resolve();
+                return new Promise((res, rej) => {
+                    if ([...document.scripts].some(s => s.src === src)) return res();
                     const s = document.createElement('script');
-                    s.src = src;
-                    s.async = true;
-                    s.onload = resolve;
-                    s.onerror = () => reject(new Error('Failed to load ' + src));
+                    s.src = src; s.async = true; s.onload = res; s.onerror = () => rej(new Error('Failed to load ' + src));
                     document.head.appendChild(s);
                 });
             }
-
             async function ensureCaptureLib() {
                 if (window.htmlToImage?.toPng) return 'htmlToImage';
-                try { await loadScriptOnce(HTML_TO_IMAGE_CDN); } catch (_) { }
+                try { await loadScriptOnce(HTML_TO_IMAGE_CDN); } catch { }
                 if (window.htmlToImage?.toPng) return 'htmlToImage';
-
                 if (window.domtoimage?.toPng) return 'domtoimage';
-                try { await loadScriptOnce(DOM_TO_IMAGE_CDN); } catch (_) { }
+                try { await loadScriptOnce(DOM_TO_IMAGE_CDN); } catch { }
                 if (window.domtoimage?.toPng) return 'domtoimage';
-
                 throw new Error('No capture library available');
             }
-
             async function waitForFonts() {
                 if (document.fonts && document.fonts.status !== 'loaded') {
-                    try { await document.fonts.ready; } catch (_) { }
+                    try { await document.fonts.ready; } catch { }
                 }
             }
 
-            // Create off-screen clone for clean capture
-            function makeTightClone(node) {
-                const wrap = document.createElement('div');
-                wrap.style.position = 'fixed';
-                wrap.style.left = '-10000px';
-                wrap.style.top = '-10000px';
-                wrap.style.display = 'inline-block';
-                wrap.style.background = BG_COLOR || 'transparent';
-                wrap.style.padding = EXTRA_PADDING; // extra width around table
+            function measureLiveTableWidth() {
+                const liveTable = document.querySelector(TABLE_SELECTOR);
+                if (!liveTable) {
+                    // fall back to capture area width
+                    const liveBox = document.querySelector(CAPTURE_SELECTOR);
+                    return (liveBox?.getBoundingClientRect().width || 800);
+                }
+                return liveTable.getBoundingClientRect().width || liveTable.scrollWidth || 800;
+            }
 
+            function buildStage(node) {
+                // Stage: exact canvas size
+                const stage = document.createElement('div');
+                stage.style.position = 'fixed';
+                stage.style.left = '-10000px';
+                stage.style.top = '-10000px';
+                stage.style.background = BG_COLOR || 'transparent';
+                stage.style.width = TARGET_WIDTH + 'px';
+                stage.style.height = TARGET_HEIGHT + 'px';
+                stage.style.overflow = 'hidden';
+
+                // Scaler we will transform (so content CSS stays intact)
+                const scaler = document.createElement('div');
+                scaler.style.position = 'absolute';
+                scaler.style.left = '0';
+                scaler.style.top = '0';
+                scaler.style.transformOrigin = 'top left';
+
+                // Clone the capture area
                 const clone = node.cloneNode(true);
-                wrap.appendChild(clone);
-                document.body.appendChild(wrap);
 
-                const table = wrap.querySelector(TABLE_SELECTOR) || clone;
-                const rect = table.getBoundingClientRect();
-                table.style.width = rect.width + 'px';
-                table.style.margin = '0 auto'; // keep centered
+                // Remove margins on wrapper so top-left is tight
+                clone.style.margin = '0';
 
-                return { wrap, table };
+                // LOCK the table width to its LIVE pixel width (prevents % reflow/collapse)
+                const liveW = Math.max(1, Math.round(measureLiveTableWidth()));
+                const cloneTable = clone.querySelector(TABLE_SELECTOR);
+                if (cloneTable) {
+                    cloneTable.style.margin = '0';
+                    cloneTable.style.width = liveW + 'px';   // kill width:90%
+                    // Keep your intended layout behavior
+                    cloneTable.style.tableLayout = 'auto';    // or 'fixed' if you prefer fixed columns
+                }
+
+                scaler.appendChild(clone);
+                stage.appendChild(scaler);
+                document.body.appendChild(stage);
+
+                // Compute scale to fill width exactly; anchor top-left (no left/right white)
+                const scale = TARGET_WIDTH / liveW;
+                scaler.style.transform = `scale(${scale})`;
+
+                // If the scaled height is less than canvas, you may see bottom white space.
+                // Align to top (no extra top gap):
+                scaler.style.top = '0px';
+
+                // Optional: if you want vertical CENTER instead, uncomment:
+                // const scaledH = (clone.getBoundingClientRect().height || clone.scrollHeight || 1) * scale;
+                // scaler.style.top = Math.max(0, (TARGET_HEIGHT - scaledH) / 2) + 'px';
+
+                return { stage, scaler };
             }
 
-            function removeTightClone(wrap) {
-                try { document.body.removeChild(wrap); } catch (_) { }
-            }
-
-            function getMonthText() {
-                return (document.getElementById('monthAbbr')?.textContent || 'MONTH').trim();
-            }
+            function destroyStage(stage) { try { document.body.removeChild(stage); } catch { } }
+            function getMonthText() { return (document.getElementById('monthAbbr')?.textContent || 'MONTH').trim(); }
 
             async function exportNow() {
-                const table = document.querySelector(TABLE_SELECTOR);
-                if (!table) {
-                    alert('Table not found on the page.');
-                    return;
-                }
+                const node = document.querySelector(CAPTURE_SELECTOR);
+                if (!node) { alert('Capture area not found.'); return; }
 
                 const lib = await ensureCaptureLib();
                 await waitForFonts();
-                window.scrollTo({ top: 0 });
 
-                const oldPad = document.body.style.paddingTop;
-                document.body.style.paddingTop = '0px';
-
-                const { wrap, table: clonedTable } = makeTightClone(table);
-
-                const opts = {
-                    pixelRatio: PIXEL_RATIO,
-                    cacheBust: true,
-                    backgroundColor: BG_COLOR, // html-to-image
-                    bgcolor: BG_COLOR,         // dom-to-image
-                    style: { transform: 'none', zoom: 1 }
-                };
+                const { stage } = buildStage(node);
 
                 try {
+                    const opts = {
+                        width: TARGET_WIDTH,
+                        height: TARGET_HEIGHT,
+                        pixelRatio: 1,
+                        cacheBust: true,
+                        backgroundColor: BG_COLOR,
+                        bgcolor: BG_COLOR
+                    };
+
                     let dataUrl;
                     if (lib === 'htmlToImage') {
-                        dataUrl = await window.htmlToImage.toPng(clonedTable, opts);
+                        dataUrl = await window.htmlToImage.toPng(stage, opts);
                     } else {
-                        dataUrl = await window.domtoimage.toPng(clonedTable, opts);
+                        dataUrl = await window.domtoimage.toPng(stage, opts);
                     }
 
                     const a = document.createElement('a');
@@ -607,28 +568,17 @@
                     a.click();
                 } catch (err) {
                     console.error('Export failed:', err);
-                    alert('Sorry, export failed. Check console for details.');
+                    alert('Export failed (see console).');
                 } finally {
-                    removeTightClone(wrap);
-                    document.body.style.paddingTop = oldPad;
+                    destroyStage(stage);
                 }
             }
 
-            function ready(fn) {
-                if (document.readyState !== 'loading') fn();
-                else document.addEventListener('DOMContentLoaded', fn);
-            }
-
-            ready(() => {
-                const btn = document.getElementById(BUTTON_ID);
-                if (!btn) {
-                    console.warn(`Button #${BUTTON_ID} not found; cannot bind export.`);
-                    return;
-                }
-                btn.addEventListener('click', exportNow);
-            });
+            function ready(fn) { document.readyState !== 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn); }
+            ready(() => { const b = document.getElementById(BUTTON_ID); if (b) b.addEventListener('click', exportNow); });
         })();
     </script>
+
 
 
     <!-- Firebase init -->
@@ -647,19 +597,15 @@
         const db = firebase.database();
     </script>
 
-    <!-- Header padding sync (so content starts below fixed header) -->
+    <!-- Header padding sync -->
     <script>
         function syncBodyPaddingToHeader() {
             const header = document.querySelector('form[name="timeform"]');
             if (!header) return;
-            // total rendered height (image + nav)
-            const h = header.offsetHeight;
-            document.body.style.paddingTop = h + 'px';
+            document.body.style.paddingTop = header.offsetHeight + 'px';
         }
-        // run after layout + after header image loads, and on resize
         window.addEventListener('load', syncBodyPaddingToHeader);
         window.addEventListener('resize', syncBodyPaddingToHeader);
-        // if the header image loads later
         const headerImg = document.querySelector('form[name="timeform"] img');
         if (headerImg) { headerImg.addEventListener('load', syncBodyPaddingToHeader); }
     </script>
@@ -678,7 +624,7 @@
             const m = d.getMonth() + 1;
             monthPicker.value = `${d.getFullYear()}-${String(m).padStart(2, "0")}`;
             monthAbbr.textContent = d.toLocaleString('en', { month: 'short' }).toUpperCase();
-            monthNumberCell.textContent = m; // month as number (1–12)
+            monthNumberCell.textContent = m;
             loadMonth();
         })();
 
@@ -714,8 +660,7 @@
                 const tr = document.createElement('tr');
 
                 const cDay = document.createElement('td');
-                cDay.textContent = day;
-                cDay.className = 'date-col';
+                cDay.textContent = day; cDay.className = 'date-col';
                 tr.appendChild(cDay);
 
                 for (let i = 0; i < 4; i++) {
@@ -725,8 +670,7 @@
                 }
 
                 const k = document.createElement('td');
-                k.textContent = kerala || "";
-                k.className = 'kerala-col';
+                k.textContent = kerala || ""; k.className = 'kerala-col';
                 tr.appendChild(k);
 
                 for (let i = 4; i < timeCols.length; i++) {
@@ -739,17 +683,11 @@
             }
         }
 
-        function cell(txt) {
-            const td = document.createElement('td');
-            td.textContent = txt || "";
-            return td;
-        }
+        function cell(txt) { const td = document.createElement('td'); td.textContent = txt || ""; return td; }
 
         async function readDate(dateStr) {
             const snap = await db.ref('results/' + dateStr).get();
-            const latestByTime = {};
-            let kerala = "";
-
+            const latestByTime = {}; let kerala = "";
             if (snap.exists()) {
                 const val = snap.val();
                 if (val.kerala) kerala = val.kerala;
@@ -762,10 +700,7 @@
                     if (isNewer) latestByTime[t] = { num: item.number, ts: item.ts || 0 };
                 });
             }
-            Object.keys(latestByTime).forEach(t => {
-                latestByTime[t] = latestByTime[t].num;
-            });
-
+            Object.keys(latestByTime).forEach(t => { latestByTime[t] = latestByTime[t].num; });
             return { latestByTime, kerala };
         }
     </script>
