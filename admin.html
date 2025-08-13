@@ -238,15 +238,17 @@
 
             <div class="form-group">
 
-                <!-- NEW: Kerala 5‑digit (always editable / overwrites) -->
+                <!-- Kerala 6-digit (always editable / overwrites) -->
                 <div class="show-card" style="margin-bottom:12px;">
-                    <div class="show-label">Kerala (5 digits)</div>
-                    <input id="kerala-input" class="show-input" inputmode="numeric" maxlength="5" placeholder="-----" />
+                    <div class="show-label">Kerala (6 digits)</div>
+                    <input id="kerala-input" class="show-input" inputmode="numeric" maxlength="6"
+                        placeholder="------" />
                     <div style="margin-top:6px;">
                         <button id="save-kerala-btn" class="save-btns" type="button">Save Kerala</button>
                         <span id="kerala-status" style="margin-left:8px;font-weight:600;"></span>
                     </div>
                 </div>
+
 
                 <!-- regular shows -->
                 <div class="shows-grid">
@@ -377,7 +379,7 @@
 
         // numeric guard 5 digits
         keralaInput.addEventListener('input', () => {
-            keralaInput.value = keralaInput.value.replace(/\D/g, '').slice(0, 5);
+            keralaInput.value = keralaInput.value.replace(/\D/g, '').slice(0, 6);
         });
 
         async function loadKerala() {
@@ -399,7 +401,7 @@
             const date = document.getElementById('date').value;
             if (!date) return toastKerala('❌ Select a date.', 'red');
             const val = keralaInput.value.trim();
-            if (val.length !== 5) return toastKerala('❌ Enter 5 digits.', 'red');
+            if (val.length !== 6) return toastKerala('❌ Enter 6 digits.', 'red');
 
             keralaBtn.disabled = true; toastKerala('Saving…', '#111827');
             try {
